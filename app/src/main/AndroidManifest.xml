@@ -22,7 +22,8 @@
             android:name=".radiusSelectActivity"
             android:label="@string/title_activity_radius_select"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UserInfoActivity"></activity>
+        <activity android:name=".UserInfoActivity" />
+        <activity android:name=".DisplayMessageActivity"></activity>
     </application>
 
 </manifest>
