@@ -18,6 +18,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private Calendar calendar;
     private TextView dateView;
+    private TextView reviewView;
     private int year, month, day;
 
     @Override
@@ -26,6 +27,7 @@ public class UserInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_info);
 
         dateView = (TextView) findViewById(R.id.dateText);
+        reviewView = (TextView) findViewById(R.id.reviewLabel);
         calendar = Calendar.getInstance();
 
         year = calendar.get(Calendar.YEAR);
@@ -78,8 +80,15 @@ public class UserInfoActivity extends AppCompatActivity {
         }
     };
 
+    // TODO: create listeners for all input changes
+
     private void showDate(int year, int month, int day) {
         dateView.setText(new StringBuilder().append(day).append("/")
+                .append(month).append("/").append(year));
+    }
+
+    private void updateReview(int year, int month, int day) {
+        reviewView.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
     }
 }

@@ -106,6 +106,19 @@
                 android:id="@+id/ageSpinner"
                 android:spinnerMode="dialog" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Please confirm your trip details..."
+                android:id="@+id/confirmation" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/review"
+                android:id="@+id/reviewLabel" />
+
         </LinearLayout>
     </ScrollView>
 

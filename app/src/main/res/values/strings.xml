@@ -17,4 +17,5 @@
         <item>30 - 65</item>
         <item>Over 65</item>
     </string-array>
+    <string name="review"></string>
 </resources>
