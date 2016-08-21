@@ -110,7 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void sendFullInfo(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        Intent intent = new Intent(this, FsqActivity.class);
 
         // bundle more information
         extras.putDouble("EXTRA_LAT", lat);

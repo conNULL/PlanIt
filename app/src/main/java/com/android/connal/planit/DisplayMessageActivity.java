@@ -18,24 +18,26 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        String pplNum = extras.getString("EXTRA_PPL");
-        String budget = extras.getString("EXTRA_BUD");
-        int day = extras.getInt("EXTRA_DAY");
-        int month = extras.getInt("EXTRA_MON");
-        int year = extras.getInt("EXTRA_YEAR");
-        int hour = extras.getInt("EXTRA_HOUR");
-        int min = extras.getInt("EXTRA_MIN");
-        String age = extras.getString("EXTRA_AGE");
-        double lat = extras.getDouble("EXTRA_LAT");
-        double lon = extras.getDouble("EXTRA_LON");
-        double rad = extras.getDouble("EXTRA_RAD");
-        String message = new StringBuilder().append(pplNum).append("\n").append(budget).append("\n")
-                .append(day).append("/").append(month).append("/").append(year).append("\n").append(hour)
-                .append(":").append(min).append("\n").append(age).append("\n").append(lat).append("\n")
-                .append(lon).append("\n").append(rad).append("\n").toString();
+        String s = extras.getString("Venues");
+
+//        String pplNum = extras.getString("EXTRA_PPL");
+//        String budget = extras.getString("EXTRA_BUD");
+//        int day = extras.getInt("EXTRA_DAY");
+//        int month = extras.getInt("EXTRA_MON");
+//        int year = extras.getInt("EXTRA_YEAR");
+//        int hour = extras.getInt("EXTRA_HOUR");
+//        int min = extras.getInt("EXTRA_MIN");
+//        String age = extras.getString("EXTRA_AGE");
+//        double lat = extras.getDouble("EXTRA_LAT");
+//        double lon = extras.getDouble("EXTRA_LON");
+//        double rad = extras.getDouble("EXTRA_RAD");
+//        String message = new StringBuilder().append(pplNum).append("\n").append(budget).append("\n")
+//                .append(day).append("/").append(month).append("/").append(year).append("\n").append(hour)
+//                .append(":").append(min).append("\n").append(age).append("\n").append(lat).append("\n")
+//                .append(lon).append("\n").append(rad).append("\n").toString();
         TextView textView = new TextView(this);
         textView.setTextSize(32);
-        textView.setText(message);
+        textView.setText(s);
 
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_display_message);
         layout.addView(textView);

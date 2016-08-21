@@ -14,7 +14,11 @@ import android.os.Bundle;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -30,18 +34,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
-public class FsqActivity extends ListActivity {
+public class
+FsqActivity extends ListActivity {
     ArrayList<FoursquareVenue> venuesList;
 
     // the foursquare client_id and the client_secret
     final String CLIENT_ID = "MC55ZQD0IW1KBLKRI3DBE3Z4FFRWOSIP4443HWTGABWTCAVI";
     final String CLIENT_SECRET = "QTIXPKKDVKRIPUH5GGFJGAFNIZFYMHD13OLM5JDGLQG0WPCW";
-
-    // we will need to take the latitude and the logntitude from a certain point
+   static  Map<Integer, FoursquareVenue> scoreMap;
+    // we will need to take the latitude and the longitude from a certain point
     // this is the center of New York
-    final String latitude = "40.7463956";
-    final String longtitude = "-73.9852992";
     final String radius = "100";
+    private Bundle extras;
+    String latitude;
+    String longtitude;
 
     ArrayAdapter myAdapter;
 
@@ -49,7 +55,11 @@ public class FsqActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fsq);
-
+        extras  = getIntent().getExtras();
+        latitude = String.valueOf(extras.getDouble("EXTRA_LAT"));
+        longtitude  = String.valueOf(extras.getDouble("EXTRA_LON"));
+        //latitude = "40.7463956";
+        //longtitude = "-73.9852992";
         // start the AsyncTask that makes the call for the venus search.
         new fourquare().execute();
     }
@@ -81,15 +91,17 @@ public class FsqActivity extends ListActivity {
 
                 // parseFoursquare venues search result
                 venuesList =  parseFoursquare(temp);
+                Integer[] scoreSorter = new ArrayList<Integer>(scoreMap.keySet()).toArray(new Integer[scoreMap.size()]);
+                Arrays.sort(scoreSorter, Collections.reverseOrder());
                 String venue;
                 StringBuilder sb = new StringBuilder("");
-                sb.append(venuesList.get(0).getName());
+                sb.append(scoreMap.get(scoreSorter[0]).getName());
                 //System.out.println("Num: " + venuesList.size());
-                for (int i = 1; i < venuesList.size(); i++) {
+                for (int i = 1; i < scoreSorter.length; i++) {
                     // make a list of the venus that are loaded in the list.
                     // show the name, the category and the city
-                    sb.append(venuesList.get(i).getName());
-                    venue = venuesList.get(i).getName() + ", " + venuesList.get(i).getCategory() + "" + venuesList.get(i).getCity();
+                    sb.append(","+scoreMap.get(scoreSorter[i]).getName());
+                   // venue = venuesList.get(scoreSorter[i]).getName() + ", " + venuesList.get(i).getCategory() + "" + venuesList.get(i).getCity();
                     //System.out.println("Venue: " + venuesList.get(i));
                 }
 
@@ -97,8 +109,10 @@ public class FsqActivity extends ListActivity {
                 // and show them in the xml
 //                myAdapter = new ArrayAdapter(FsqActivity.this, R.layout.activity_fsq, android.R.id.list, listTitle);
 //                setListAdapter(myAdapter);
-                Intent intent = new Intent();
-                intent.putExtra("Venues", sb.toString());
+                Intent intent = new Intent(FsqActivity.this, ScheduleEventListActivity.class);
+                Bundle bun = new Bundle();
+                bun.putString("Venues", sb.toString());
+                intent.putExtras(bun);
                 startActivity(intent);
 
             }
@@ -152,11 +166,12 @@ public class FsqActivity extends ListActivity {
 
         ArrayList<FoursquareVenue> temps = new ArrayList<FoursquareVenue>();
         FoursquareVenue poi;
+        scoreMap = new HashMap<Integer, FoursquareVenue>();
         try {
             //System.out.println("Response: "+response);
             // make an jsonObject in order to parse the response
             JSONObject jsonObject = new JSONObject(response);
-
+            int score = 0;
             // make an jsonObject in order to parse the response
             if (jsonObject.has("response")) {
                 if (jsonObject.getJSONObject("response").has("venues")) {
@@ -167,8 +182,25 @@ public class FsqActivity extends ListActivity {
                         //System.out.println("Name: " + jsonArray.getJSONObject(i).getString("name"));
                         poi.setCategory(jsonArray.getJSONObject(i).getJSONArray("categories").getJSONObject(0).getString("name"));
                         poi.setName(jsonArray.getJSONObject(i).getString("name"));
-                        poi.setDistance(Integer.parseInt(jsonArray.getJSONObject(i).getJSONObject("location").getString("distance")));
-
+                        try {
+                            poi.setDistance(Integer.parseInt(jsonArray.getJSONObject(i).getJSONObject("location").getString("distance")));
+                        } catch(Exception e){
+                            poi.setDistance(800);
+                        }
+                        try {
+                            poi.setCheckins(Integer.parseInt(jsonArray.getJSONObject(i).getJSONObject("stats").getString("checkinsCount")));
+                        }catch(Exception e){
+                            poi.setCheckins(0);
+                        }
+                        try {
+                            poi.setHere(Integer.parseInt(jsonArray.getJSONObject(i).getJSONObject("hereNow").getString("count")));
+                        }catch (Exception e){
+                            poi.setHere(0);
+                        }
+                        score = poi.getDistance() + poi.getHere() + Math.max(1, poi.getCheckins())/10;
+                        while(scoreMap.containsKey(score))
+                            score--;
+                        scoreMap.put(score, poi);
                         temps.add(poi);
                     }
                 }
