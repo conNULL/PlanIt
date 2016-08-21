@@ -110,14 +110,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Please confirm your trip details..."
-                android:id="@+id/confirmation" />
+                android:text="Please confirm your trip details; click &quot;Continue&quot; to proceed"
+                android:id="@+id/continueLabel" />
 
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/review"
-                android:id="@+id/reviewLabel" />
+                android:text="Continue"
+                android:id="@+id/continueButtom"
+                android:onClick="sendInfo" />
 
             <Button
                 android:id="@+id/generatePlansButton"

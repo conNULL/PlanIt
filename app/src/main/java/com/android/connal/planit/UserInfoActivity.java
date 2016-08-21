@@ -1,8 +1,10 @@
 package com.android.connal.planit;
 
+import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -37,7 +40,6 @@ public class UserInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_info);
 
         dateView = (TextView) findViewById(R.id.dateText);
-        reviewView = (TextView) findViewById(R.id.reviewLabel);
         calendar = Calendar.getInstance();
 
         year = calendar.get(Calendar.YEAR);
@@ -58,12 +60,15 @@ public class UserInfoActivity extends AppCompatActivity {
 
         final Spinner budget_spinner = (Spinner) findViewById(R.id.budgetSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
+
+        // setting up spinner for budget
+        Spinner budget_spinner = (Spinner) findViewById(R.id.budgetSpinner);
+
         ArrayAdapter<CharSequence> budget_adapter = ArrayAdapter.createFromResource(this,
                 R.array.budget_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         budget_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         budget_spinner.setAdapter(budget_adapter);
+
 
         // Listen to user's budget selection based on spinner input -> update
         budget_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -80,11 +85,13 @@ public class UserInfoActivity extends AppCompatActivity {
 
         final Spinner age_spinner = (Spinner) findViewById(R.id.ageSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
+
+        // setting up spinner for age
+        Spinner age_spinner = (Spinner) findViewById(R.id.ageSpinner);
+
         ArrayAdapter<CharSequence> age_adapter = ArrayAdapter.createFromResource(this,
                 R.array.age_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         age_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         age_spinner.setAdapter(age_adapter);
 
         // Listen to user's age selection based on spinner input -> update
@@ -113,6 +120,8 @@ public class UserInfoActivity extends AppCompatActivity {
         });
     }
 
+    // the four methods below are for implementing the calendar dialogue
+
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
         showDialog(999);
@@ -139,8 +148,6 @@ public class UserInfoActivity extends AppCompatActivity {
         }
     };
 
-    // TODO: create listeners for all input changes
-
     private void showDate(int year, int month, int day) {
         dateView.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
@@ -157,6 +164,35 @@ public class UserInfoActivity extends AppCompatActivity {
     // Next activity shows generated schedule of events
     public void generatePlans(View view) {
         Intent intent = new Intent(this, ScheduleEventListActivity.class);
+
+    // pass collected information to next activity
+    @TargetApi(Build.VERSION_CODES.M)
+    public void sendInfo(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+
+        // get information from the input fields
+        EditText editText = (EditText) findViewById(R.id.pplNumText);
+        String pplNum = editText.getText().toString();
+        Spinner budget_spinner = (Spinner) findViewById(R.id.budgetSpinner);
+        String budget = budget_spinner.getSelectedItem().toString();
+        TimePicker time_picker = (TimePicker) findViewById(R.id.timePicker);
+        int hour = time_picker.getHour();
+        int min = time_picker.getMinute();
+        Spinner age_spinner = (Spinner) findViewById(R.id.ageSpinner);
+        String age = age_spinner.getSelectedItem().toString();
+
+        // bundle the information
+        Bundle extras = new Bundle();
+        extras.putString("EXTRA_PPL", pplNum);
+        extras.putString("EXTRA_BUD", budget);
+        extras.putInt("EXTRA_DAY", day);
+        extras.putInt("EXTRA_MON", month+1);
+        extras.putInt("EXTRA_YEAR", year);
+        extras.putInt("EXTRA_HOUR", hour);
+        extras.putInt("EXTRA_MIN", min);
+        extras.putString("EXTRA_AGE", age);
+
+        intent.putExtras(extras);
         startActivity(intent);
     }
 }
