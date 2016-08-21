@@ -21,7 +21,8 @@
         <activity
             android:name=".radiusSelectActivity"
             android:label="@string/title_activity_radius_select"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UserInfoActivity"></activity>
     </application>
 
 </manifest>
