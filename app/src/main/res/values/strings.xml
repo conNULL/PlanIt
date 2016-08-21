@@ -3,6 +3,8 @@
     <string name="app_slogan">One planet. Your Plan It.</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_radius_select">radiusSelectActivity</string>
+
+    <string name="title_activity_maps">Map</string>
     <string name="date_selected"></string>
     <string-array name="budget_array">
         <item>$ - less than $20</item>
@@ -14,7 +16,7 @@
         <item>Under 12</item>
         <item>13 - 18</item>
         <item>19 - 30</item>
-        <item>30 - 65</item>
+        <item>31 - 65</item>
         <item>Over 65</item>
     </string-array>
     <string name="review"></string>

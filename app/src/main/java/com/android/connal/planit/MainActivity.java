@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void emailButtonClicked(View view) {
-        // Intent intent = new Intent(this, radiusSelectActivity.class);
+    public void toPreference(View view){
         Intent intent = new Intent(this, UserInfoActivity.class);
         startActivity(intent);
     }

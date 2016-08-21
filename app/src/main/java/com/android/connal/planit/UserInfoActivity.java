@@ -90,7 +90,7 @@ public class UserInfoActivity extends AppCompatActivity {
     // pass collected information to next activity
     @TargetApi(Build.VERSION_CODES.M)
     public void sendInfo(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
 
         // get information from the input fields
         EditText editText = (EditText) findViewById(R.id.pplNumText);
