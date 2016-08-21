@@ -7,6 +7,7 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -27,9 +28,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".radiusSelectActivity"
-            android:label="@string/title_activity_radius_select"
+            android:name=".FsqActivity"
+            android:label="@string/title_activity_fsq"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,10 +46,22 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-
+            android:label="@string/title_activity_maps" />
         <activity android:name=".UserInfoActivity" />
-        <activity android:name=".DisplayMessageActivity"></activity>
+        <activity android:name=".DisplayMessageActivity" />
+        <activity
+            android:name=".ScheduleEventListActivity"
+            android:label="@string/title_looooool_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ScheduleEventDetailActivity"
+            android:label="@string/title_looooool_detail"
+            android:parentActivityName=".ScheduleEventListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.connal.planit.ScheduleEventListActivity" />
+        </activity>
     </application>
 
 </manifest>
