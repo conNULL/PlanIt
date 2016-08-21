@@ -2,6 +2,7 @@ package com.android.connal.planit;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -151,5 +152,11 @@ public class UserInfoActivity extends AppCompatActivity {
                 .append(day).append("/").append(month+1).append("/").append(year).append("\n").append(hour)
                 .append(": ").append(minutes).append("\n").append(age).append("years old"));
         return true;
+    }
+
+    // Next activity shows generated schedule of events
+    public void generatePlans(View view) {
+        Intent intent = new Intent(this, ScheduleEventListActivity.class);
+        startActivity(intent);
     }
 }

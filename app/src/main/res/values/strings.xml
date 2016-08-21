@@ -18,4 +18,6 @@
         <item>Over 65</item>
     </string-array>
     <string name="review"></string>
+    <string name="title_scheduleevent_list">Your Plans</string>
+    <string name="title_scheduleevent_detail">Activity Details</string>
 </resources>

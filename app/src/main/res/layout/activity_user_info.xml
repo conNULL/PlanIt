@@ -119,6 +119,14 @@
                 android:text="@string/review"
                 android:id="@+id/reviewLabel" />
 
+            <Button
+                android:id="@+id/generatePlansButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="Generate Plans"
+                android:onClick="generatePlans"/>
+
         </LinearLayout>
     </ScrollView>
 

@@ -18,11 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UserInfoActivity" />
         <activity
-            android:name=".radiusSelectActivity"
-            android:label="@string/title_activity_radius_select"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UserInfoActivity"></activity>
+            android:name=".ScheduleEventListActivity"
+            android:label="@string/title_scheduleevent_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ScheduleEventDetailActivity"
+            android:label="@string/title_scheduleevent_detail"
+            android:parentActivityName=".ScheduleEventListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.connal.planit.ScheduleEventListActivity" />
+        </activity>
     </application>
 
 </manifest>
