@@ -18,6 +18,9 @@ public class Events {
     // Test input array list
     public static final List<EventItem> inputEventItems = Arrays.asList(event1, event2, event3);
 
+    // Test input array list of event names
+    public static final List<String> inputEventNames = new ArrayList<String>();
+
     // Array containing all event items
     public static final List<EventItem> eventItems = new ArrayList<EventItem>();
 
@@ -25,6 +28,23 @@ public class Events {
     public static final Map<String, EventItem> eventMap = new HashMap<String, EventItem>();
 
     static {
+
+        Iterator<String> eventNamesIt = inputEventNames.iterator();
+
+        int currentEventHour = 10;
+        String currentEventMinute1 = "0";
+        String currentEventMinute2 = "0";
+
+        while (eventNamesIt.hasNext()) {
+            String currentEventName = eventNamesIt.next();
+            String currentEventDetails = "";
+            String currentEventTime = Integer.toString(currentEventHour) + ":" + currentEventMinute1 + currentEventMinute2;
+            EventItem currentEventObj = new EventItem(currentEventTime, currentEventName, currentEventDetails);
+            addItem(currentEventObj);
+            currentEventHour++;
+        }
+
+        /*
         Iterator<EventItem> eventItemsIt = inputEventItems.iterator();
 
         // Iterate through all scheduled event times and add their information
@@ -34,6 +54,7 @@ public class Events {
             EventItem currentEventItem = eventItemsIt.next();
             addItem(currentEventItem);
         }
+        */
     }
 
     private static void addItem(EventItem item) {
