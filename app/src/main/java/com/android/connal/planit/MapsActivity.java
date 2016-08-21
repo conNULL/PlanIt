@@ -1,5 +1,6 @@
 package com.android.connal.planit;
 
+import android.content.Intent;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -26,12 +27,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double lon;
     private double lat;
     private double rad;
+    private Bundle extras;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        Intent intent = getIntent();
+        extras = intent.getExtras();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -101,7 +106,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public double[] info(){
         double[] i = {lon,lat,rad};
         TextView textView1 = (TextView)findViewById(R.id.newlocation);
-        textView1.setText(lon + " " + lat + " " + rad);
         return i;
+    }
+
+    public void sendFullInfo(View view) {
+        Intent intent = new Intent(this, DisplayMessageActivity.class);
+
+        // bundle more information
+        extras.putDouble("EXTRA_LAT", lat);
+        extras.putDouble("EXTRA_LON", lon);
+        extras.putDouble("EXTRA_RAD", rad);
+
+        intent.putExtras(extras);
+        startActivity(intent);
     }
 }

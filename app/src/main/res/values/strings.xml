@@ -16,7 +16,7 @@
         <item>Under 12</item>
         <item>13 - 18</item>
         <item>19 - 30</item>
-        <item>30 - 65</item>
+        <item>31 - 65</item>
         <item>Over 65</item>
     </string-array>
     <string name="review"></string>

@@ -60,4 +60,13 @@
         android:onClick="newlocationbuttonclicked"
         android:layout_gravity="left" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Continue"
+        android:layout_gravity="right"
+        android:onClick="sendFullInfo"
+        android:id="@+id/continuefrommap"/>
+
 </LinearLayout>

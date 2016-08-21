@@ -26,9 +26,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
         int hour = extras.getInt("EXTRA_HOUR");
         int min = extras.getInt("EXTRA_MIN");
         String age = extras.getString("EXTRA_AGE");
+        double lat = extras.getDouble("EXTRA_LAT");
+        double lon = extras.getDouble("EXTRA_LON");
+        double rad = extras.getDouble("EXTRA_RAD");
         String message = new StringBuilder().append(pplNum).append("\n").append(budget).append("\n")
                 .append(day).append("/").append(month).append("/").append(year).append("\n").append(hour)
-                .append(":").append(min).append("\n").append(age).toString();
+                .append(":").append(min).append("\n").append(age).append("\n").append(lat).append("\n")
+                .append(lon).append("\n").append(rad).append("\n").toString();
         TextView textView = new TextView(this);
         textView.setTextSize(32);
         textView.setText(message);
