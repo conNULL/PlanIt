@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-import com.android.connal.planit.dummy.DummyContent;
 
 import java.util.List;
 
@@ -68,15 +65,15 @@ public class ScheduleEventListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Events.eventItems));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DummyContent.DummyItem> mValues;
+        private final List<Events.EventItem> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+        public SimpleItemRecyclerViewAdapter(List<Events.EventItem> items) {
             mValues = items;
         }
 
@@ -90,7 +87,7 @@ public class ScheduleEventListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).time);
+            holder.mIdView.setText(mValues.get(position).eventTime);
             holder.mContentView.setText(mValues.get(position).eventName);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +95,7 @@ public class ScheduleEventListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(ScheduleEventDetailFragment.ARG_ITEM_ID, holder.mItem.time);
+                        arguments.putString(ScheduleEventDetailFragment.ARG_ITEM_ID, holder.mItem.eventTime);
                         ScheduleEventDetailFragment fragment = new ScheduleEventDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -107,7 +104,7 @@ public class ScheduleEventListActivity extends AppCompatActivity {
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, ScheduleEventDetailActivity.class);
-                        intent.putExtra(ScheduleEventDetailFragment.ARG_ITEM_ID, holder.mItem.time);
+                        intent.putExtra(ScheduleEventDetailFragment.ARG_ITEM_ID, holder.mItem.eventTime);
 
                         context.startActivity(intent);
                     }
@@ -124,7 +121,7 @@ public class ScheduleEventListActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
-            public DummyContent.DummyItem mItem;
+            public Events.EventItem mItem;
 
             public ViewHolder(View view) {
                 super(view);
