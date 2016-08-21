@@ -1,8 +1,63 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingTop="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:orientation="vertical">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="6"
     tools:context="com.android.connal.planit.MapsActivity" />
+
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/newlocation"
+        android:text="..."
+        android:layout_marginLeft="25dp"
+        android:textAlignment="center"
+        android:onClick="newlocationtextclicked" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="right"
+        android:text="Radius"
+        android:textAlignment="center"
+        android:id="@+id/radiusSeekBarLabel"/>
+
+    <SeekBar
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="right"
+        android:max = "10"
+        android:id="@+id/radiusSeekBar"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Change Location"
+        android:layout_marginLeft="25dp"
+        android:id="@+id/newlocationbutton"
+        android:onClick="newlocationbuttonclicked"
+        android:layout_gravity="left" />
+
+</LinearLayout>
