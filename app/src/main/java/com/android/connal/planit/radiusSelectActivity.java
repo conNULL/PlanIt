@@ -2,9 +2,7 @@ package com.android.connal.planit;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.widget.Toast;
 
 public class radiusSelectActivity extends Activity {
 
@@ -13,14 +11,9 @@ public class radiusSelectActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radius_select);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        // Draw the radius circle and slider
+        setContentView(new radiusSelectCustomView(this));
     }
-
 }
+
+

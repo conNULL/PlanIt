@@ -12,4 +12,26 @@
     tools:context="com.android.connal.planit.radiusSelectActivity"
     tools:showIn="@layout/activity_radius_select">
 
+    <SeekBar
+    android:id="@+id/zoomSlider"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="26dp"
+    android:max="10"/>
+
+    <TextView
+        android:id="@+id/zoomSliderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_alignTop= "@id/zoomSlider"
+        android:layout_centerHorizontal="true" />
+
+    <com.android.connal.planit.radiusSelectCustomView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/radiusSelectCustomView" />
+
 </RelativeLayout>

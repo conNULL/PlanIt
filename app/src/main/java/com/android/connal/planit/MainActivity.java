@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void emailButtonClicked(View view) {
+    // Move to the next activity (radius selection screen)
+    public void nextButton(View view) {
         Intent intent = new Intent(this, radiusSelectActivity.class);
         startActivity(intent);
     }
