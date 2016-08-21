@@ -45,6 +45,9 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+
+        <activity android:name=".UserInfoActivity" />
+        <activity android:name=".DisplayMessageActivity"></activity>
     </application>
 
 </manifest>
